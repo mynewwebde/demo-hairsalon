@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hair Studio Berlin – Friseursalon</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --dark: #0c0c0c;
+      --card: #161616;
+      --accent: #d4af8a;
+      --text: #f0ece6;
+      --muted: #7a7269;
+    }
+    body { font-family: 'Inter', sans-serif; background: var(--dark); color: var(--text); }
+    a { text-decoration: none; color: inherit; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1.2rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(12,12,12,0.92); backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(212,175,138,0.15);
+    }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; letter-spacing: 2px; }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--muted); font-size: 0.88rem; letter-spacing: 1px; text-transform: uppercase; transition: color 0.3s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-btn { padding: 0.6rem 1.5rem; border: 1px solid var(--accent); color: var(--accent); border-radius: 4px; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; }
+
+    .hero {
+      min-height: 100vh; display: flex; align-items: center;
+      padding: 6rem 2rem 4rem;
+      background: linear-gradient(135deg, #0c0c0c 0%, #1a1210 100%);
+      position: relative; overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; right: 0; top: 0; bottom: 0; width: 45%;
+      background: linear-gradient(to left, rgba(212,175,138,0.05), transparent);
+      pointer-events: none;
+    }
+    .hero-inner { max-width: 600px; }
+    .hero-eyebrow { color: var(--accent); font-size: 0.8rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 2rem; }
+    .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 600; line-height: 1.05; margin-bottom: 2rem; }
+    .hero h1 em { color: var(--accent); font-style: italic; }
+    .hero p { color: var(--muted); font-size: 1rem; line-height: 1.9; margin-bottom: 2.5rem; }
+    .btn-accent { padding: 0.9rem 2.5rem; background: var(--accent); color: var(--dark); font-weight: 600; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; border-radius: 4px; }
+    .btn-ghost { padding: 0.9rem 2.5rem; border: 1px solid rgba(212,175,138,0.4); color: var(--text); font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; border-radius: 4px; margin-left: 1rem; }
+
+    .section { padding: 5rem 2rem; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-eyebrow { color: var(--accent); font-size: 0.78rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 1rem; display: block; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; }
+
+    .services-bg { background: var(--card); }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+    .service-card {
+      padding: 2rem 1.5rem; border: 1px solid rgba(212,175,138,0.12); border-radius: 8px;
+      transition: border-color 0.3s;
+    }
+    .service-card:hover { border-color: var(--accent); }
+    .service-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+    .service-name { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; margin-bottom: 0.5rem; }
+    .service-price { color: var(--accent); font-size: 0.9rem; font-weight: 600; margin-bottom: 0.75rem; }
+    .service-desc { color: var(--muted); font-size: 0.85rem; line-height: 1.6; }
+
+    .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; margin-top: 3rem; }
+    .team-card { text-align: center; }
+    .team-avatar {
+      width: 120px; height: 120px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--card), #2a1f16);
+      margin: 0 auto 1.25rem;
+      border: 2px solid rgba(212,175,138,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.5rem;
+    }
+    .team-name { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; margin-bottom: 0.25rem; }
+    .team-role { color: var(--accent); font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; }
+
+    .hours-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; max-width: 400px; }
+    .hours-row { display: flex; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 0.9rem; }
+    .hours-day { color: var(--muted); }
+    .hours-time { color: var(--text); }
+
+    footer { background: var(--card); padding: 2.5rem 2rem; text-align: center; border-top: 1px solid rgba(212,175,138,0.1); }
+    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--accent); letter-spacing: 2px; }
+    .footer-copy { color: var(--muted); font-size: 0.85rem; margin-top: 1rem; }
+    .footer-note { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.08); color: var(--muted); font-size: 0.8rem; }
+    .footer-note a { color: var(--accent); }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .btn-ghost { margin-left: 0; margin-top: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo">Hair <span>Studio</span></div>
+    <ul class="nav-links">
+      <li><a href="#services">Leistungen</a></li>
+      <li><a href="#team">Team</a></li>
+      <li><a href="#oeffnungszeiten">Zeiten</a></li>
+    </ul>
+    <a href="tel:+493012345678" class="nav-btn">Termin buchen</a>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="hero-eyebrow">Premium Friseursalon · Berlin Mitte</p>
+      <h1>Dein Haar.<br><em>Dein</em> Auftritt.</h1>
+      <p>Wir schaffen mehr als nur einen Haarschnitt — wir schaffen ein Gefühl. Individuell, modern und mit Leidenschaft für jedes Detail.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:1rem">
+        <a href="tel:+493012345678" class="btn-accent">Termin buchen</a>
+        <a href="#services" class="btn-ghost">Leistungen</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section services-bg" id="services">
+    <div class="section-inner">
+      <span class="section-eyebrow">Was wir anbieten</span>
+      <h2 class="section-title">Unsere Leistungen</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">✂️</div>
+          <div class="service-name">Haarschnitt</div>
+          <div class="service-price">ab 45€</div>
+          <p class="service-desc">Klassisch oder modern — präzise geschnitten, auf dein Gesicht abgestimmt.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🎨</div>
+          <div class="service-name">Coloration</div>
+          <div class="service-price">ab 80€</div>
+          <p class="service-desc">Komplett-Colorationen, Highlights und Balayage in allen Farbtönen.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">💫</div>
+          <div class="service-name">Styling</div>
+          <div class="service-price">ab 35€</div>
+          <p class="service-desc">Föhnen, Glätten, Locken — für jeden Anlass perfekt gestylt.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🌿</div>
+          <div class="service-name">Pflegekur</div>
+          <div class="service-price">ab 25€</div>
+          <p class="service-desc">Intensive Haarpflege mit hochwertigen Produkten für mehr Glanz und Kraft.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="team">
+    <div class="section-inner">
+      <span class="section-eyebrow">Wer wir sind</span>
+      <h2 class="section-title">Unser Team</h2>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-avatar">👩‍🦱</div>
+          <div class="team-name">Sara M.</div>
+          <div class="team-role">Inhaberin & Stylistin</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">👨‍🦲</div>
+          <div class="team-name">Jonas K.</div>
+          <div class="team-role">Colorist</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">👩‍🦳</div>
+          <div class="team-name">Lena W.</div>
+          <div class="team-role">Stylistin</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--card)" id="oeffnungszeiten">
+    <div class="section-inner" style="max-width:500px">
+      <span class="section-eyebrow">Wann wir da sind</span>
+      <h2 class="section-title">Öffnungszeiten</h2>
+      <div style="margin-top:2rem">
+        <div class="hours-row"><span class="hours-day">Montag</span><span class="hours-time">Geschlossen</span></div>
+        <div class="hours-row"><span class="hours-day">Di – Fr</span><span class="hours-time">9:00 – 19:00</span></div>
+        <div class="hours-row"><span class="hours-day">Samstag</span><span class="hours-time">8:00 – 18:00</span></div>
+        <div class="hours-row"><span class="hours-day">Sonntag</span><span class="hours-time">Geschlossen</span></div>
+      </div>
+      <p style="color:var(--muted);font-size:0.9rem;margin-top:2rem">📍 Rosenthaler Str. 15, 10119 Berlin<br>📞 +49 30 12345678</p>
+      <a href="tel:+493012345678" class="btn-accent" style="display:inline-block;margin-top:1.5rem">Jetzt anrufen</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">Hair Studio</div>
+    <p class="footer-copy">Rosenthaler Str. 15 · 10119 Berlin · +49 30 12345678</p>
+    <p class="footer-note">Demo-Webseite erstellt von <a href="https://mynewweb.de">Mynewweb.de</a></p>
+  </footer>
+
+</body>
+</html>
